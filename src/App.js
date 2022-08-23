@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import React, { useState } from 'react';
+const App = () => {
+  const [getImages, setGetImages] = useState()
+  function getPhotos(images) {
+    images.map(image => {
+      setGetImages(image)
+      console.log(getImages)
+    })
+ }
+ fetch("https://api.pexels.com/v1/search?query=people",{
+   headers: {
+     Authorization: "563492ad6f917000010000017cc53e814cb84a32809bee6cbd3f58ff"
+   }
+ })
+    .then(resp => {
+      return resp.json()
+    })
+    .then(data => {
+      getPhotos(data.photos);
+    })
+  
+  return(
+    <div>
+  <h1>teste</h1>
     </div>
   );
-}
+};
 
 export default App;
